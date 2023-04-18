@@ -54,9 +54,10 @@ function filterItems(e)
     Array.from(items).forEach(function(item){
 
         var itemName = item.firstChild.textContent;
+        var description = item.childNodes[1].textContent;
         
         
-            if(itemName.toLowerCase().indexOf(text) != -1)
+            if(itemName.toLowerCase().indexOf(text) != -1 || description.toLowerCase().indexOf(text)!= -1)
             {
                 item.style.display = 'block';
             }
