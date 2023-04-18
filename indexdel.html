@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+</head>
+<body>
+  <header> <h1>Appointment Registration</h1></header>
+  <form id="my-form" onsubmit="onsignup(event)">
+    <label for="name">Name</label><br>
+    <input type="text" id="name" name="userName"> <br>
+    <label for="email">Email</label><br>
+    <input type="text" id="email" name="emailID"> <br>
+    <button type="submit"  value="submit">Submit</button><br><br>
+  </form>
+  <ul id="items"></ul>
+  <script>
+    function onsignup(event)
+  {
+    event.preventDefault();
+
+    let obj = {
+        Name : event.target.userName.value,
+
+        email : event.target.emailID.value
+    }
+    localStorage.setItem(obj.email, JSON.stringify(obj));  
+    showOnScreen(obj);
+  }
+  function showOnScreen(obj)
+  {
+    const parent = document.getElementById('items');
+    const child = document.createElement('li');
+    child.textContent = obj.Name + '-' + obj.email;
+
+    const delButton = document.createElement('input');
+    delButton.type = 'button';
+    delButton.value = 'Delete';
+    delButton.onclick = () => {
+
+      localStorage.removeItem(obj.email);
+      parent.removeChild(child)
+    }
+    child.appendChild(delButton);
+    parent.appendChild(child);
+
+  }
+ 
+  </script>
+</body>
+</html>
